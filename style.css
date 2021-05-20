@@ -5,7 +5,14 @@ background-color: rgba(255,255,255,0);
 h2 {
   font-size:1.4em;
 }
-
+/* .heatmap-canvas
+{
+  position: relative !important;
+} */
+#boxEnergy
+{
+  position: relative !important;
+}
 .color {
   width:30px;
   height:30px;

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body style="background:#f2eee5;margin:0;padding:0; ">
+<body style="background:#f2eee5;margin:0;padding:0; " >
 
   <header>Edité par Home Rough Editor Ver.0.91</header>
 
@@ -108,6 +108,9 @@
     <g id="boxDebug"></g>
   </svg>
 
+  <div id="heatmapContainer" style="height: 100vh;width: 100vw; ">
+  </div>
+  
   <div id="areaValue"></div>
 
   <div id="reportTools" class="leftBox" style="width:500px;overflow-y: scroll;overflow-x: hidden">
@@ -315,6 +318,8 @@
         <br/>
         <li><button class="btn btn-default fully " id="room_mode">CONFIG. ROOMS</button></li>
         <br/>
+        <li><button class="btn btn-default fully " id="save_diagram">SAVE</button></li>
+        <br/>
         <li><button class="btn btn-default fully " id="node_mode"><i class="fa fa-2x fa-scissors" aria-hidden="true"></i></button></li>
         <br/>
         <li><button class="btn btn-default fully " id="distance_mode" data-toggle="tooltip" data-placement="right" title="Add a measurement">MEASURE</button></li>
@@ -507,6 +512,7 @@
 
       <div style="clear:both"></div>
   </div>
+
 </body>
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
@@ -515,4 +521,7 @@
   <script src="qSVG.js"></script>
   <script src="editor.js"></script>
   <script src="engine.js"></script>
+  <script src="heatmap.js"></script>
+  <script src="heatmap.min.js"></script>
+
 </html>

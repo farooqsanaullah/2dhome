@@ -555,6 +555,7 @@ var editor = {
     this.height= (this.thick / meter).toFixed(2);
 
     var cc = carpentryCalc(classe, type, size, thick, value);
+
     var blank;
 
     for (var tt = 0; tt < cc.length; tt++) {
@@ -596,7 +597,7 @@ var editor = {
 
 
       this.update = function() {
-        console.log("update")
+       
         this.width = (this.size / meter).toFixed(2);
         this.height= (this.thick / meter).toFixed(2);
         cc = carpentryCalc(this.class, this.type, this.size, this.thick, this.value);
