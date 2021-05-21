@@ -20,9 +20,9 @@ showRib = true;
 showArea = true;
 meter = 60;
 grid_snap = 'off';
-colorbackground = "#ffffff";
+colorbackground = "#000";
 colorline = "#fff";
-colorroom = "#f0daaf";
+colorroom = "#000";
 colorWall = "#666";
 pox = 0;
 poy = 0;
@@ -650,19 +650,31 @@ document.getElementById("save_diagram").addEventListener("click", function () {
   console.log(HISTORY);
   const getJson = HISTORY[HISTORY.length-1];
   const objectFormData = JSON.parse(getJson);
-  console.log(objectFormData?.objData[0]) 
-  heapMap(objectFormData?.objData[0])
+  console.log(objectFormData?.objData) 
+  heapMap(objectFormData?.objData)
 });
 
 
 function heapMap(coordinate) {
+ 
+  let dataPoints = coordinate?.map(item=>(
+    {
+      x:item.x,
+      y:item.y,
+      value:Math.floor(Math.random()*10000)
+    }
+  ))
+  console.log({coordinate})
+  console.log({dataPoints})
+  
   // create configuration object
   var config = {
     container: document.getElementById('heatmapContainer'),
-    radius: 100,
-    maxOpacity: .5,
-    minOpacity: 0,
-    blur: .75,
+    radius: 80,
+    maxOpacity: .9,
+    minOpacity: 0.3,
+    // blur: .75,
+    backgroundColor: 'rgba(0,0,0,.95)',
     // gradient: {
     //   // enter n keys between 0 and 1 here
     //   // for gradient color customization
@@ -674,13 +686,20 @@ function heapMap(coordinate) {
   // create heatmap with configuration
   var heatmapInstance = h337.create(config);
   // a single datapoint
-  var dataPoint = {
-    x: coordinate.x, // x coordinate of the datapoint, a number
-    y: coordinate.y, // y coordinate of the datapoint, a number
-    value: 9100 // the value at datapoint(x, y)
-  };
-  heatmapInstance.addData(dataPoint);
+  // var dataPoint = {
+  //   x: ~~coordinate.bbox.x, // x coordinate of the datapoint, a number
+  //   y: ~~coordinate.bbox.y, // y coordinate of the datapoint, a number
+  //   value: 9100 // the value at datapoint(x, y)
+  // };
+
+   var data = {
+     max:90,
+     data:dataPoints
+   }
+
+  heatmapInstance.setData(data);
   console.log(heatmapInstance)
+
 }
 
 
