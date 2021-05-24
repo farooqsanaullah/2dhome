@@ -23,7 +23,7 @@
 var HeatmapConfig = {
   defaultRadius: 40,
   defaultRenderer: 'canvas2d',
-  defaultGradient: { 0.25: "rgb(0,0,255)", 0.55: "rgb(0,255,0)", 0.85: "yellow", 1.0: "rgb(255,0,0)"},
+  // defaultGradient: { 0.25: "rgb(0,0,255)", 0.55: "rgb(0,255,0)", 0.85: "yellow", 1.0: "rgb(255,0,0)"},
   defaultMaxOpacity: 1,
   defaultMinOpacity: 0,
   defaultBlur: .85,
@@ -137,21 +137,24 @@ var Store = (function StoreClosure() {
         while (dataLen--) {
           this.addData.call(this, dataArr[dataLen]);
         }
-      } else {
-        // add to store  
-        var organisedEntry = this._organiseData(arguments[0], true);
-        if (organisedEntry) {
-          // if it's the first datapoint initialize the extremas with it
-          if (this._data.length === 0) {
-            this._min = this._max = organisedEntry.value;
-          }
-          this._coordinator.emit('renderpartial', {
-            min: this._min,
-            max: this._max,
-            data: [organisedEntry]
-          });
-        }
-      }
+      } 
+       console.log("argument first index value ",arguments)
+
+      // else {
+      //   // add to store  
+      //   var organisedEntry = this._organiseData(arguments[0], true);
+      //   if (organisedEntry) {
+      //     // if it's the first datapoint initialize the extremas with it
+      //     if (this._data.length === 0) {
+      //       this._min = this._max = organisedEntry.value;
+      //     }
+      //     this._coordinator.emit('renderpartial', {
+      //       min: this._min,
+      //       max: this._max,
+      //       data: [organisedEntry]
+      //     });
+      //   }
+      // }
       return this;
     },
     setData: function(data) {

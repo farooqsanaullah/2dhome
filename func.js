@@ -647,58 +647,116 @@ document.getElementById("wallTrash").addEventListener("click", function () {
 });
 
 document.getElementById("save_diagram").addEventListener("click", function () {
-  console.log(HISTORY);
+  // console.log(HISTORY);
   const getJson = HISTORY[HISTORY.length-1];
   const objectFormData = JSON.parse(getJson);
-  console.log(objectFormData?.objData) 
-  heapMap(objectFormData?.objData)
+  // console.log(objectFormData?.objData)
+  var id = $('#roomIndex').val();
+  //COLOR
+  var data = $('#roomBackground').val();
+  ROOM.map((room)=>
+  {
+    room.color = data
+    console.log(data)
+    console.log(room.color)
+  })
+  // heapMap(objectFormData?.objData)
 });
 
 
 function heapMap(coordinate) {
  
-  let dataPoints = coordinate?.map(item=>(
-    {
-      x:item.x,
-      y:item.y,
-      value:Math.floor(Math.random()*10000)
-    }
-  ))
-  console.log({coordinate})
-  console.log({dataPoints})
+  // let dataPoints = coordinate?.map(item=>(
+  //   {
+  //     x:item.x,
+  //     y:item.y,
+  //     value:Math.floor(Math.random()*10000000)
+  //   }
+  // ))
+  // console.log({coordinate})
+  // console.log({dataPoints})
   
-  // create configuration object
-  var config = {
-    container: document.getElementById('heatmapContainer'),
-    radius: 80,
-    maxOpacity: .9,
-    minOpacity: 0.3,
-    // blur: .75,
-    backgroundColor: 'rgba(0,0,0,.95)',
-    // gradient: {
-    //   // enter n keys between 0 and 1 here
-    //   // for gradient color customization
-    //   '.5': 'blue',
-    //   '.8': 'red',
-    //   '.95': 'white'
-    // }
-  };
-  // create heatmap with configuration
-  var heatmapInstance = h337.create(config);
-  // a single datapoint
-  // var dataPoint = {
-  //   x: ~~coordinate.bbox.x, // x coordinate of the datapoint, a number
-  //   y: ~~coordinate.bbox.y, // y coordinate of the datapoint, a number
-  //   value: 9100 // the value at datapoint(x, y)
+  // // create configuration object
+  // var config = {
+  //   container: document.getElementById('heatmapContainer'),
+  //   radius: 80,
+  //   maxOpacity: .9,
+  //   minOpacity: 0.3,
+  //   // blur: .75,
+  //   backgroundColor: 'rgba(0,0,0,.95)',
+  //   // gradient: {
+  //   //   // enter n keys between 0 and 1 here
+  //   //   // for gradient color customization
+  //   //   '.5': 'blue',
+  //   //   '.8': 'red',
+  //   //   '.95': 'white'
+  //   // }
   // };
+  // // create heatmap with configuration
+  // var heatmapInstance = h337.create(config);
+  // // a single datapoint
+  // // var dataPoint = {
+  // //   x: ~~coordinate.bbox.x, // x coordinate of the datapoint, a number
+  // //   y: ~~coordinate.bbox.y, // y coordinate of the datapoint, a number
+  // //   value: 9100 // the value at datapoint(x, y)
+  // // };
 
-   var data = {
-     max:90,
-     data:dataPoints
-   }
+  //  var data = {
+  //    max:190,
+  //    data:dataPoints
+  //  }
 
+  // heatmapInstance.setData(data);
+  // console.log(heatmapInstance)
+
+  var heatmapInstance = h337.create({
+    // required container
+    container: document.querySelector('#roomBackground'),
+    // backgroundColor to cover transparent areas
+    backgroundColor: 'rgba(0,0,0,.95)',
+    // custom gradient colors
+    gradient: {
+      // enter n keys between 0 and 1 here
+      // for gradient color customization
+      '.5': 'blue',
+      '.8': 'red',
+      '.95': 'white'
+    },
+    // the maximum opacity (the value with the highest intensity will have it)
+    maxOpacity: .9,
+    // minimum opacity. any value > 0 will produce
+    // no transparent gradient transition
+    minOpacity: .3
+  });
+  
+  // now generate some random data
+  var points = [];
+  var max = 0;
+  var width = 840;
+  var height = 400;
+  var len = 300;
+  
+  while (len--) {
+    var val = Math.floor(Math.random()*100);
+    var radius = Math.floor(Math.random()*70);
+  
+    max = Math.max(max, val);
+    var point = {
+      x: Math.floor(Math.random()*width),
+      y: Math.floor(Math.random()*height),
+      value: val,
+      radius: radius
+    };
+    points.push(point);
+  }
+  // heatmap data format
+  var data = {
+    max: max,
+    data: points
+  };
+  // if you have a set of datapoints always use setData instead of addData
+  // for data initialization
   heatmapInstance.setData(data);
-  console.log(heatmapInstance)
 
 }
 
@@ -723,6 +781,7 @@ var roomColorBtn = document.querySelectorAll(".roomColor");
 for (var k = 0; k < roomColorBtn.length; k++) {
   roomColorBtn[k].addEventListener("click", function () {
     var data = this.getAttribute('data-type');
+    console.log("data gradientNeutral ",data)
     $('#roomBackground').val(data);
     binder.attr({ 'fill': 'url(#' + data + ')' });
   });

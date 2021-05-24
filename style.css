@@ -103,6 +103,14 @@ header{display:none;font-size:11px}
     }
 }
 body {font-family: 'Roboto', sans-serif;overflow:hidden}
+
+#gradientWhite
+{
+  position: absolute !important;
+  background:#08d !important
+}
+
+
 input[type=range] {
   -webkit-appearance: none;
   margin: 18px 0;
