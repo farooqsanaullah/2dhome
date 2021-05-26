@@ -665,18 +665,63 @@ document.getElementById("save_diagram").addEventListener("click", function () {
   heapMapTest()
 });
 
+
+// function draw(ctx) {
+//   console.log(ctx);
+
+//   window.requestAnimationFrame(draw);
+//   ctx?.clearRect(0, 0, canvas.width, canvas.height);
+//   for (let i = 0; i <= 100; i += 10) {
+//     let sx = 0, sy = i;
+//     let ex = 100, ey = i;
+//     [sx, sy] = WtoS(sx, sy);
+//     [ex, ey] = WtoS(ex, ey);
+//     ctx?.beginPath();
+//     ctx?.moveTo(sx, sy);
+//     ctx?.lineTo(ex, ey);
+//     ctx?.stroke();
+//   }
+//   for (let i = 0; i <= 100; i += 10) {
+//     let sx = i, sy = 0;
+//     let ex = i, ey = 100;
+//     [sx, sy] = WtoS(sx, sy);
+//     [ex, ey] = WtoS(ex, ey);
+//     ctx?.beginPath();
+//     ctx?.moveTo(sx, sy);
+//     ctx?.lineTo(ex, ey);
+//     ctx?.stroke();
+//   }
+// }
+function WtoS(wx, wy,ox,oy,scx,scy) {
+  let sx = (wx - ox) * scx;
+  let sy = (wy - oy) * scy;
+  return [sx, sy];
+}
+function StoW(sx, sy,ox,oy,scx,scy) {
+  let wx = sx / scx + ox;
+  let wy = sy / scy + oy;
+  return [wx, wy];
+}
+
+var generatedDataHeapMap;
+
 function heapMapTest() {
   // customized heatmap configuration
 
-  let div = document.querySelector('#heatmap');
-  
-  
-  console.log(div)
+  // let canvas = document.querySelector('#canvas');
+  // var context = canvas.getContext("2d");
+
   // console.log("div props ",div.tagName('canvas'))
   // heatmap-canvas
   // console.log($("#heatmap").find("canvas"));
- console.log($("#heatmap > canvas.heatmap-canvas"))
- 
+  //   let canvas = $("#heatmap > canvas.heatmap-canvas");
+  //   console.log(canvas)
+  //  var context = canvas.context;
+  //  console.log(context)
+
+
+
+
   var heatmapInstance = h337.create({
     // required container
     container: document.querySelector('#heatmap'),
@@ -696,6 +741,81 @@ function heapMapTest() {
     // no transparent gradient transition
     minOpacity: .3
   });
+
+  // let div = document.querySelector('#heatmap');
+  let mapContainer = document.querySelectorAll('#heatmap canvas');
+  let canvas = mapContainer[0];
+  var context = canvas.getContext('2d');
+
+  context.scale(2, 2)
+  console.log(context)
+  console.log(context.scale(2, 2))
+  context.clearRect(0, 0, canvas.width, canvas.height);
+
+  context.save();
+  context.translate(translatePos.x, translatePos.y);
+  context.scale(scale, scale);
+  context.beginPath(); // begin custom shape
+  context.moveTo(-119, -20);
+  context.bezierCurveTo(-159, 0, -159, 50, -59, 50);
+  context.bezierCurveTo(-39, 80, 31, 80, 51, 50);
+  context.bezierCurveTo(131, 50, 131, 20, 101, 0);
+  context.bezierCurveTo(141, -60, 81, -70, 51, -50);
+  context.bezierCurveTo(31, -95, -39, -80, -39, -50);
+  context.bezierCurveTo(-89, -95, -139, -80, -119, -20);
+  context.closePath(); // complete custom shape
+  var grd = context.createLinearGradient(-59, -100, 81, 100);
+  grd.addColorStop(0, "#8ED6FF"); // light blue
+  grd.addColorStop(1, "#004CB3"); // dark blue
+  context.fillStyle = grd;
+  context.fill();
+
+  context.lineWidth = 5;
+  context.strokeStyle = "#0000ff";
+  context.stroke();
+  context.restore();
+
+  // control.init()
+  // control.layout()
+
+//    var ox = 0, oy = 0, px = 0, py = 0, scx = 1, scy = 1;
+//    canvas.onmousedown = (e) => { px = e.x; py = e.y; canvas.onmousemove = (e) => { ox -= (e.x - px); oy -= (e.y - py); px = e.x; py = e.y; } }
+
+//  canvas.onmouseup = () => { canvas.onmousemove = null; }
+//   canvas.onwheel = (e) => {
+//     let bfzx, bfzy, afzx, afzy;[bfzx, bfzy] = StoW(e.x, e.y); scx -= 10 * scx / e.deltaY; scy -= 10 * scy / e.deltaY;
+//     [afzx, afzy] = StoW(e.x, e.y);
+//     ox += (bfzx - afzx);
+//     oy += (bfzy - afzy);
+//   }
+  // var ctx = canvas.getContext("2d");
+  // // window.requestAnimationFrame();
+  // // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+  // for (let i = 0; i <= 100; i += 10) {
+  //   let sx = 0, sy = i;
+  //   let ex = 100, ey = i;
+  //   [sx, sy] = WtoS(sx, sy,ox,oy,scx,scy);
+  //   [ex, ey] = WtoS(ex, ey,ox,oy,scx,scy);
+  //   ctx.beginPath();
+  //   ctx.moveTo(sx, sy);
+  //   ctx.lineTo(ex, ey);
+  //   ctx.stroke();
+  // }
+  // for (let i = 0; i <= 100; i += 10) {
+  //   let sx = i, sy = 0;
+  //   let ex = i, ey = 100;
+    
+  //   [sx, sy] = WtoS(sx, sy,ox,oy,scx,scy);
+  //   [ex, ey] = WtoS(ex, ey,ox,oy,scx,scy);
+  //   ctx.beginPath();
+  //   ctx.moveTo(sx, sy);
+  //   ctx.lineTo(ex, ey);
+  //   ctx.stroke();
+  // }
+
+
 
   // now generate some random data
 
@@ -725,10 +845,10 @@ function heapMapTest() {
   };
   // if you have a set of datapoints always use setData instead of addData
   // for data initialization
-  var generatedDataHeapMap = heatmapInstance.setData(data);
+  generatedDataHeapMap = heatmapInstance.setData(data);
 
-  console.log("generatedDataHeapMap ",generatedDataHeapMap)
-
+  console.log("generatedDataHeapMap ", generatedDataHeapMap)
+   
 }
 
 
