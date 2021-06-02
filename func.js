@@ -648,10 +648,10 @@ document.getElementById("wallTrash").addEventListener("click", function () {
 
 document.getElementById("save_diagram").addEventListener("click", function () {
   // console.log(HISTORY);
-   const getJson = HISTORY[HISTORY.length - 1];
-   console.log(getJson)
-   const objectFormData = JSON.parse(getJson);
-   console.log(objectFormData)
+  //  const getJson = HISTORY[HISTORY.length - 1];
+  //  console.log(getJson)
+  //  const objectFormData = JSON.parse(getJson);
+  //  console.log(objectFormData)
   // var id = $('#roomIndex').val();
   // //COLOR
   // var data = $('#roomBackground').val();
@@ -662,7 +662,10 @@ document.getElementById("save_diagram").addEventListener("click", function () {
   //   console.log(room.color)
   // })
 
-   heapMap(objectFormData?.objData)
+  var svg = document.getElementById('lin');
+  console.log(svg)
+
+  //  heapMap(objectFormData?.objData)
   // heapMap()
   // heapMapTest()
 });
