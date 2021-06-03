@@ -13,13 +13,13 @@
   <!-- <script src="temperatureMap.js"></script> -->
 
 </head>
-
-<body style="background:#f2eee5;margin:0;padding:0; ">
+<!-- background:#f2eee5; -->
+<body style="margin:0;padding:0;">
 
   <header>Edité par Home Rough Editor Ver.0.91</header>
 
   <svg id="lin" viewBox="0 0 1100 700" preserveAspectRatio="xMidYMin slice"
-    style="margin:0;padding:0;width:100vw;height:100vh;top:0;left:0;right:0;bottom:0">
+    style="margin:0;padding:0;width:100vw;height:100vh;top:0;left:0;right:0;bottom:0 ;position: absolute !important;z-index: 2 !important;">
 
     <defs>
       <linearGradient id="gradientRed" x1="0%" y1="0%" x2="100%" y2="100%" spreadMethod="pad">
@@ -63,15 +63,15 @@
         <stop offset="100%" stop-color="#f699c7" stop-opacity="1" />
       </linearGradient>
       <linearGradient id="gradientBlack" x1="0%" y1="0%" x2="100%" y2="100%" spreadMethod="pad">
-        <stop offset="0%"   stop-color="#3c3b3b" stop-opacity="1"/>
-        <stop offset="100%" stop-color="#000000" stop-opacity="1"/>
+        <stop offset="0%" stop-color="#3c3b3b" stop-opacity="1" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="1" />
       </linearGradient>
       <linearGradient id="gradientNeutral" x1="0%" y1="0%" x2="100%" y2="100%" spreadMethod="pad">
         <stop offset="0%" stop-color="#05085F" stop-opacity="1" />
         <stop offset="100%" stop-color="#05085F" stop-opacity="1" />
       </linearGradient>
 
-  
+
 
       <pattern id="grass" patternUnits="userSpaceOnUse" width="256" height="256">
         <image
@@ -123,13 +123,9 @@
     <g id="boxDebug"></g>
   </svg>
 
-  <!-- <div id="heatmap" style="height: 100vh;width: 100vw;"> -->
-    <!-- <canvas id="canvas" width="1000" height="1000">
 
-    </canvas> -->
-  <!-- </div> -->
 
-  <div id="heatmap">
+  <div id="heatmap" style="height: 100vh;width: 100vw;">
 
   </div>
 
@@ -196,7 +192,7 @@
       <p><i class="fa fa-compass" aria-hidden="true"></i> Rotation : <span id="bboxRotationVal"></span> °</p>
       <input type="range" id="bboxRotation" step="1" class="range" min="-180" max="180" />
     </section>
-
+    home/index.html
     <div id="stepsCounter" style="display:none;">
       <p><span id="bboxSteps">Nb steps [2-15] : <span id="bboxStepsVal">0</span></span></p>
       <button class="btn btn-info" id="bboxStepsAdd"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -646,9 +642,5 @@
 <script src="heatmap.js"></script>
 <!-- <script src="temp.js"></script> -->
 
-
-
-
-<!-- <script src="heatmap.min.js"></script> -->
 
 </html>

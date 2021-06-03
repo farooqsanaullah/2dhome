@@ -648,10 +648,10 @@ document.getElementById("wallTrash").addEventListener("click", function () {
 
 document.getElementById("save_diagram").addEventListener("click", function () {
   // console.log(HISTORY);
-  //  const getJson = HISTORY[HISTORY.length - 1];
-  //  console.log(getJson)
-  //  const objectFormData = JSON.parse(getJson);
-  //  console.log(objectFormData)
+   const getJson = HISTORY[HISTORY.length - 1];
+   console.log(getJson)
+   const objectFormData = JSON.parse(getJson);
+   console.log(objectFormData)
   // var id = $('#roomIndex').val();
   // //COLOR
   // var data = $('#roomBackground').val();
@@ -662,10 +662,10 @@ document.getElementById("save_diagram").addEventListener("click", function () {
   //   console.log(room.color)
   // })
 
-  var svg = document.getElementById('lin');
-  console.log(svg)
+  // var svg = document.getElementById('lin');
+  // console.log(svg)
 
-  //  heapMap(objectFormData?.objData)
+    heapMap(objectFormData?.objData);
   // heapMap()
   // heapMapTest()
 });
@@ -693,7 +693,7 @@ function heapMapTest() {
     // required container
     container: document.querySelector('#heatmap'),
     // backgroundColor to cover transparent areas
-    // backgroundColor: 'rgba(0,0,0,.95)',
+     backgroundColor: 'rgba(0,0,0,.95)',
     // custom gradient colors
     gradient: {
       // enter n keys between 0 and 1 here
@@ -759,7 +759,8 @@ function heapMapTest() {
 
 function heapMap(coordinate) {
 
-  let dataPoints = coordinate?.map(item => (
+  let dataPoints = []
+  dataPoints  = coordinate?.map(item => (
     {
       x: item.x,
       y: item.y,
@@ -798,8 +799,10 @@ function heapMap(coordinate) {
     data: dataPoints
   }
 
-  heatmapInstance.setData(data)
-  heatmapInstance.setData(data);
+ console.log("data ",data)
+
+  var heap =  heatmapInstance.setData(data)
+  console.log(heap)
   // let getGradient = document.querySelector('#needgradientWhite')
   // getGradient.setAttribute("stop-color", "#05085F");
   // getGradient.setAttribute("stop-opacity", ".2");
